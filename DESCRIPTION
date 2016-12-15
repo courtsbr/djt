@@ -1,5 +1,5 @@
 Package: djt
-Title: Baixa diarios oficiais da justica trabalhista.
+Title: Baixa diarios oficiais da justica trabalhista
 Version: 0.0.0.9000
 Authors@R: person("Julio", "Trecenti", email = "jtrecenti@abj.org.br", role = c("aut", "cre"))
 Description: Baixa diarios oficiais da justica trabalhista a partir do portal
@@ -7,9 +7,17 @@ Description: Baixa diarios oficiais da justica trabalhista a partir do portal
     (judicial e administrativo).
 Depends:
     R (>= 3.3.2)
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    tidyverse
+    tidyverse,
+    dplyr,
+    httr,
+    lubridate,
+    purrr,
+    rvest,
+    stringr,
+    tibble,
+    xml2
 RoxygenNote: 5.0.1
