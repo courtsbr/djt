@@ -2,9 +2,14 @@ Package: djt
 Title: Baixa diarios oficiais da justica trabalhista.
 Version: 0.0.0.9000
 Authors@R: person("Julio", "Trecenti", email = "jtrecenti@abj.org.br", role = c("aut", "cre"))
-Description: Baixa diarios oficiais da justica trabalhista a partir do portal do TST. Funciona para diferentes combinacoes de tribunais, datas e cadernos (judicial e administrativo).
-Depends: R (>= 3.3.2)
+Description: Baixa diarios oficiais da justica trabalhista a partir do portal
+    do TST. Funciona para diferentes combinacoes de tribunais, datas e cadernos
+    (judicial e administrativo).
+Depends:
+    R (>= 3.3.2)
 License: MIT
 Encoding: UTF-8
 LazyData: true
-Imports: tidyverse
+Imports:
+    tidyverse
+RoxygenNote: 5.0.1
