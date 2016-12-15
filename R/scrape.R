@@ -1,5 +1,5 @@
 n_pag <- function(r_djt) {
-  deate <- '([0-9]+)[[:space:]]+até[[:space:]]+([0-9]+)[[:space:]]+de[[:space:]]+([0-9]+)'
+  deate <- '([0-9]+)[[:space:]]+at\u00e9[[:space:]]+([0-9]+)[[:space:]]+de[[:space:]]+([0-9]+)'
   docs <- r_djt %>%
     httr::content('text') %>%
     xml2::read_html() %>%
