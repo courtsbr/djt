@@ -6,7 +6,7 @@ Description: Baixa diarios oficiais da justica trabalhista a partir do portal
     do TST. Funciona para diferentes combinacoes de tribunais, datas e cadernos
     (judicial e administrativo).
 Depends:
-    R (>= 3.3.2)
+    R (>= 3.3.1)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
