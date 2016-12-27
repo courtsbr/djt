@@ -32,6 +32,8 @@ baixar_pdf <- dplyr::failwith(tibble::tibble(result = 'erro'), function(...) {
                l$dir, (l$pag - 1) / 30 + 1, l$.id, l$regiao,
                l$caderno, as.character(l$data_disp))
   wd <- httr::write_disk(a, overwrite = TRUE)
-  httr::POST(u_pdf(), body = dados_req_pdf(...), wd)
+  if (!file.exists(a)) {
+    httr::POST(u_pdf(), body = dados_req_pdf(...), wd)
+  }
   tibble::tibble(result = 'OK')
 })
