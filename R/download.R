@@ -1,5 +1,6 @@
 paginar <- dplyr::failwith(tibble::tibble(result = 'erro'), function(...) {
-  body <- dados_req(...)
+  l <- list(...)
+  body <- dados_req(..., de = l$pag)
   r_djt <- httr::POST(u_djt(), body = body, encode = 'form')
   d_tab <- parse_table(r_djt)
   state <- pegar_state(r_djt)
@@ -37,3 +38,15 @@ baixar_pdf <- dplyr::failwith(tibble::tibble(result = 'erro'), function(...) {
   }
   tibble::tibble(result = 'OK')
 })
+
+
+# l <- lapply(x, function(x) dplyr::failwith(list('nao deu'), pdftools::pdf_info)(x))
+# ids <- l %>%
+#   purrr::map_lgl(~is.null(.x$version)) %>%
+#   which()
+
+
+
+
+
+
