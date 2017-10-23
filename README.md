@@ -1,6 +1,6 @@
 # djt
 
-[![Travis-CI Build Status](https://travis-ci.org/abjur/djt.svg?branch=master)](https://travis-ci.org/abjur/djt)
+[![Travis-CI Build Status](https://travis-ci.org/abjur/djt.svg?branch=master)](https://travis-ci.org/abjur/djt)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/courtsbr/djt?branch=master&svg=true)](https://ci.appveyor.com/project/courtsbr/djt)
 
 ## Overview
 
