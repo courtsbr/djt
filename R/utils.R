@@ -11,4 +11,4 @@ NULL
 # Get rid of spurious NOTEs
 globalVariables(c(
   ".", "V1", "V4", "color", "end", "font_family", "font_size", "id", "lead",
-  "n", "page", "setNames", "size", "start", "title", "xpath"))
+  "n", "page", "setNames", "size", "start", "title", "xpath", "string", "positions"))
