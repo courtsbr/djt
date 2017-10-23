@@ -5,4 +5,4 @@ draft.R
 teste.txt
 *.html
 data-raw
-
+.DS_Store
