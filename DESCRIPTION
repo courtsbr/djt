@@ -1,17 +1,16 @@
 Package: djt
-Title: Baixa diarios oficiais da justica trabalhista
+Title: A toolbox to download Brazilian DJTs
 Version: 0.0.0.9000
-Authors@R: person("Julio", "Trecenti", email = "jtrecenti@abj.org.br", role = c("aut", "cre"))
-Description: Baixa diarios oficiais da justica trabalhista a partir do portal
-    do TST. Funciona para diferentes combinacoes de tribunais, datas e cadernos
-    (judicial e administrativo).
-Depends:
-    R (>= 3.3.1)
+Authors@R: c(
+  person("Julio", "Trecenti", email = "jtrecenti@abj.org.br", role = c("aut", "cre")),
+  person("Caio", "Lente", email = "ctlente@gmail.com", role = c("aut")))
+Description: This package makes it easy to download DJTs from TST's official
+  website by providing the user with ways to filter dates, courts, booklets, etc.
+Depends: R (>= 3.3.1)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    tidyverse,
     dplyr,
     httr,
     lubridate,
@@ -19,6 +18,10 @@ Imports:
     rvest,
     stringr,
     tibble,
-    xml2
-RoxygenNote: 5.0.1
+    xml2,
+    magrittr,
+    readr,
+    plyr
 Suggests: testthat
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate"))
