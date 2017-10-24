@@ -145,29 +145,29 @@ find_html_styles <- function(html) {
     xml2::xml_text()
 }
 
-build_classes_cf <- function(styles) {
-
-  plyr::ldply(styles, function(x) {
-                       stringr::str_extract_all(x,
-                        c("ft[0-9]{1,5}","font-size:[0-9]{1,2}px",
-                        "font-family:[:alpha:]{1,15}",
-                        "color:#[0-9]{5,8}"), simplify = T) %>%
-                        t}) %>%
-    setNames(c("class","font_size","font_family","color")) %>%
-    dplyr::group_by(font_size, font_family, color)
-}
-
-build_xpath_query <- function(classes_df) {
-
-  classes_df %>%
-    dplyr::summarise(xpath =
-                       paste(sapply(class, function(x) {
-                         paste0("' or @class = '",x)
-                       }), collapse = '')) %>%
-    dplyr::mutate(
-      xpath = paste0("./p[", stringr::str_sub(xpath,6),"']"),
-      nro_car = nchar(xpath),
-      size = stringr::str_extract(font_size, "[0-9]+")) %>%
-    dplyr::filter(size >= 13) %>%
-    with(xpath)
-}
+# build_classes_cf <- function(styles) {
+#
+#   plyr::ldply(styles, function(x) {
+#                        stringr::str_extract_all(x,
+#                         c("ft[0-9]{1,5}","font-size:[0-9]{1,2}px",
+#                         "font-family:[:alpha:]{1,15}",
+#                         "color:#[0-9]{5,8}"), simplify = T) %>%
+#                         t}) %>%
+#     setNames(c("class","font_size","font_family","color")) %>%
+#     dplyr::group_by(font_size, font_family, color)
+# }
+#
+# build_xpath_query <- function(classes_df) {
+#
+#   classes_df %>%
+#     dplyr::summarise(xpath =
+#                        paste(sapply(class, function(x) {
+#                          paste0("' or @class = '",x)
+#                        }), collapse = '')) %>%
+#     dplyr::mutate(
+#       xpath = paste0("./p[", stringr::str_sub(xpath,6),"']"),
+#       nro_car = nchar(xpath),
+#       size = stringr::str_extract(font_size, "[0-9]+")) %>%
+#     dplyr::filter(size >= 13) %>%
+#     with(xpath)
+# }
