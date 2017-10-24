@@ -92,6 +92,34 @@ chop_at <- function(string, positions) {
   purrr::set_names(chunks, patterns)
 }
 
+#' Get lawsuits that match a pattern
+#'
+#' @param string Input string
+#' @param pattern Pattern to match
+#'
+#' @export
+match_lawsuits <- function(string, pattern) {
+
+  # Chop string into lawsuits
+  chopped <- string %>%
+    find_all("Processo.{1,10}[0-9]{7}-[0-9]{2}\\.[0-9]{4}\\.[0-9]\\.[0-9]{2}\\.[0-9]{4}") %>%
+    chop_at(string, .) %>%
+    purrr::set_names(NULL) %>%
+    utils::head(-1)
+
+  # Get indexes of lawsuits that match pattern
+  chops_idx <- chopped %>%
+    stringr::str_detect(pattern) %>%
+    which()
+
+  # Get lawsuit numbers
+  chopped %>%
+    magrittr::extract(chops_idx) %>%
+    purrr::map_chr(stringr::str_extract,
+      "[:alpha:]*-?[0-9]{7}-[0-9]{2}\\.[0-9]{4}\\.[0-9]\\.[0-9]{2}\\.[0-9]{4}") %>%
+    unique()
+}
+
 #' Remove text's first header
 #'
 #' @param string Input string
@@ -109,7 +137,7 @@ remove_first_header <- function(string) {
 #' @export
 remove_headers <- function(string) {
  # regex_ <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*Regi\u00e3o [0-9]{1,2}\nData da Disponibiliza\u00e7\u00e3o.*\n")
- regex <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*Data da Disponibiliza\u00e7\u00e3o.*\n")
+ regex <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*\n?Data da Disponibiliza\u00e7\u00e3o.*\n")
  stringr::str_replace_all(string, regex, "\n")
 }
 

@@ -36,4 +36,18 @@ download_djt(trt = 2, path = "~/Desktop/djt_files", booklet = "all",
 
 After you have downloaded as many DJTs as you want, you can start parsing them.
 Functions like `pdf_to_text()`, `find_all()`, `chop_at()`, and `pre_process()`
-are your best tools for this step.
+are your best tools for this step. If you want to find all lawsuits whose contents
+match a certain pattern, you can use `match_lawsuits()` with a DJT that has been
+converted to text:
+
+```r
+# Get all lawsuits that contain "SANTANDER"
+match_lawsuits(djt, "SANTANDER")
+#> [1] "RTOrd-0001317-23.2015.5.02.0003"
+#> [2] "RtSum-0001584-20.2006.5.02.0003"
+#> [3] "ExFis-0000900-02.1993.5.02.0005"
+#> [4] "RTOrd-0001064-63.2014.5.02.0005"
+#> [5] "RTOrd-1000959-61.2017.5.02.0006"
+#> ...
+```
+
