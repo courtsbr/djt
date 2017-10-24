@@ -108,7 +108,8 @@ remove_first_header <- function(string) {
 #'
 #' @export
 remove_headers <- function(string) {
- regex <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*Regi\u00e3o [0-9]{1,2}\nData da Disponibiliza\u00e7\u00e3o.*\n")
+ # regex_ <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*Regi\u00e3o [0-9]{1,2}\nData da Disponibiliza\u00e7\u00e3o.*\n")
+ regex <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*Data da Disponibiliza\u00e7\u00e3o.*\n")
  stringr::str_replace_all(string, regex, "\n")
 }
 
