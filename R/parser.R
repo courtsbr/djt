@@ -98,7 +98,7 @@ chop_at <- function(string, positions) {
 #'
 #' @export
 remove_first_header <- function(string) {
-  regex <- stringr::regex("Caderno Judiciário do Tribunal Regional do Trabalho da [0-9]{1,2}ª Região\nDIÁRIO ELE.*\nPODER JUD.*\nNº[0-9]{4,5}/[0-9]{4}.*\nTribunal .*[0-9]{1,2}ª Região\n")
+  regex <- stringr::regex("Caderno Judici\u00e1rio do Tribunal Regional do Trabalho da [0-9]{1,2}\u00aa Regi\u00e3o\nDI\u00c1RIO ELE.*\nPODER JUD.*\nN\u00ba[0-9]{4,5}/[0-9]{4}.*\nTribunal .*[0-9]{1,2}\u00aa Regi\u00e3o\n")
   stringr::str_replace_all(string, regex, "\n")
 }
 
@@ -108,7 +108,7 @@ remove_first_header <- function(string) {
 #'
 #' @export
 remove_headers <- function(string) {
- regex <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*Região [0-9]{1,2}\nData da Disponibilização.*\n")
+ regex <- stringr::regex("\f[0-9]{3,5}/[0-9]{4}.*Regi\u00e3o [0-9]{1,2}\nData da Disponibiliza\u00e7\u00e3o.*\n")
  stringr::str_replace_all(string, regex, "\n")
 }
 
@@ -118,7 +118,7 @@ remove_headers <- function(string) {
 #'
 #' @export
 remove_footers <- function(string) {
-  regex <- stringr::regex("\nCódigo para aferir autenticidade deste caderno.*\n")
+  regex <- stringr::regex("\nC\u00f3digo para aferir autenticidade deste caderno.*\n")
   stringr::str_replace_all(string, regex, "\n")
 }
 
