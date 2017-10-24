@@ -1,11 +1,11 @@
 # djt
 
-[![Travis-CI Build Status](https://travis-ci.org/abjur/djt.svg?branch=master)](https://travis-ci.org/abjur/djt)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/courtsbr/djt?branch=master&svg=true)](https://ci.appveyor.com/project/courtsbr/djt)
+[![Travis-CI Build Status](https://travis-ci.org/abjur/djt.svg?branch=master)](https://travis-ci.org/abjur/djt) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/courtsbr/djt?branch=master&svg=true)](https://ci.appveyor.com/project/courtsbr/djt)
 
 ## Overview
 
-The `djt` R package allows you to download and parse Brazilian DJTs (
-*Diários da Justiça do Trabalho*). Its functions are simple and well documented,
+The `djt` R package allows you to download and parse Brazilian DJTs
+(*Diários da Justiça do Trabalho*). Its functions are simple and well documented,
 supplying the user with a consistent and robust toolbox to explore these PDFs.
 
 To install `djt`, run the code below:
@@ -17,7 +17,7 @@ devtools::install_github("courtsbr/djt")
 
 ## Usage
 
-Downloading DJTs is very straightforward. By using the `download_djt()` function
+Downloading DJTs is very simple. By using the `download_djt()` function
 with its arguments, you can select a TRT (*Tribunal Regional do Trabalho*), a
 booklet (*caderno*), and start and end dates to download all DJTs that fit the
 specified filters.
