@@ -4,7 +4,7 @@
 \alias{match_lawsuits}
 \title{Get lawsuits that match a pattern}
 \usage{
-match_lawsuits(string, pattern, only_words = TRUE, return_id = FALSE)
+match_lawsuits(string, pattern, only_words = TRUE)
 }
 \arguments{
 \item{string}{Input string}
@@ -13,9 +13,6 @@ match_lawsuits(string, pattern, only_words = TRUE, return_id = FALSE)
 
 \item{only_words}{Make sure pattern is surrounded by non-word characters
 (see \code{\W} at \code{help("stringi-search-regex")})}
-
-\item{return_id}{Whether to return only lawsuit IDs or the whole text of
-the matched lawsuits}
 }
 \description{
 Get lawsuits that match a pattern

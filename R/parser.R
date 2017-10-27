@@ -98,15 +98,15 @@ chop_at <- function(string, positions) {
 #' @param pattern Pattern to match
 #' @param only_words Make sure pattern is surrounded by non-word characters
 #' (see `\W` at `help("stringi-search-regex")`)
-#' @param return_id Whether to return only lawsuit IDs or the whole text of
-#' the matched lawsuits
 #'
 #' @export
-match_lawsuits <- function(string, pattern, only_words = TRUE, return_id = FALSE) {
+match_lawsuits <- function(string, pattern, only_words = TRUE) {
 
   # Add word boundaries to pattern if necessary
-  if (only_words) {
-    pattern <- stringr::str_c("(?<=(^|\\W))", pattern, "(?=($|\\W))")
+  pattern_ <- if (only_words) {
+    stringr::regex(stringr::str_c("(?<=(^|\\W))", pattern, "(?=($|\\W))"), ignore_case = TRUE)
+  } else {
+    pattern
   }
 
   # Chop string into lawsuits
@@ -118,24 +118,17 @@ match_lawsuits <- function(string, pattern, only_words = TRUE, return_id = FALSE
 
   # Get indexes of lawsuits that match pattern
   chops_idx <- chopped %>%
-    stringr::str_detect(pattern) %>%
+    stringr::str_detect(pattern_) %>%
     which()
 
   # Get lawsuits' texts
   chops <- chopped %>%
     magrittr::extract(chops_idx)
 
-  # Return either IDs or contexts
-  if (!return_id) {
-    return(chops)
-  }
-  else {
-    ids <- purrr::map_chr(chops, stringr::str_extract,
-      "[:alpha:]*-?[0-9]{7}-[0-9]{2}\\.[0-9]{4}\\.[0-9]\\.[0-9]{2}\\.[0-9]{4}") %>%
-    unique()
-
-    return(ids)
-  }
+  # Return IDs, patterns and contexts
+  purrr::map_chr(chops, stringr::str_match,
+    "[:alpha:]*-?[0-9]{7}-[0-9]{2}\\.[0-9]{4}\\.[0-9]\\.[0-9]{2}\\.[0-9]{4}") %>%
+    dplyr::tibble(id = ., pattern = pattern, context = chops)
 }
 
 #' Remove text's first header
