@@ -114,7 +114,9 @@ match_lawsuits <- function(string, pattern, only_words = TRUE) {
     find_all("Processo.{1,10}[0-9]{7}-[0-9]{2}\\.[0-9]{4}\\.[0-9]\\.[0-9]{2}\\.[0-9]{4}") %>%
     chop_at(string, .) %>%
     purrr::set_names(NULL) %>%
-    utils::head(-1)
+    utils::head(-1) %>%
+    stringr::str_split("Intimado\\(s\\).+") %>%
+    purrr::map_chr(purrr::pluck, 1, 1)
 
   # Get indexes of lawsuits that match pattern
   chops_idx <- chopped %>%
