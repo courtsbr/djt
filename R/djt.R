@@ -25,7 +25,7 @@ download_djt <- function(trt, path, booklet = "all", date_min = Sys.Date() - 1,
   check_parms(trt, booklet, dates)
 
   # GET page where search will happen
-  r_search <- httr::GET("http://dejt.jt.jus.br/dejt/f/n/diariocon")
+  r_search <- httr::GET("https://dejt.jt.jus.br/dejt/f/n/diariocon")
 
   # Create body of POST request
   body <- list(
@@ -47,7 +47,7 @@ download_djt <- function(trt, path, booklet = "all", date_min = Sys.Date() - 1,
 
   # Get search results
   r_djt <- httr::POST(
-    "http://dejt.jt.jus.br/dejt/f/n/diariocon",
+    "https://dejt.jt.jus.br/dejt/f/n/diariocon",
     body = body, encode = 'form')
   n_pages <- n_pages(r_djt)
 
