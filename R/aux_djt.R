@@ -10,11 +10,32 @@ n_pages <- function(r_djt) {
     stringr::str_match(regex) %>%
     tibble::as_tibble() %>%
     dplyr::filter(!is.na(V1)) %>%
-    magrittr::extract(1, ) %>%
+    magrittr::extract(1, TRUE) %>%
     with(V4) %>%
     as.numeric() %>%
     magrittr::divide_by_int(30) %>%
     magrittr::add(1)
+}
+
+get_jid <- function(r_djt) {
+  xp <- "//script[contains(@id, 'avaliar:corpo:formulario:j_id')]"
+  r_djt %>%
+    xml2::read_html() %>%
+    rvest::html_nodes(xpath = xp) %>%
+    rvest::html_text() %>%
+    stringr::str_extract("j_id[0-9]+") %>%
+    dplyr::first()
+}
+
+pdf_jid <- function(r_djt) {
+  xp <- "//button[contains(@onclick, 'plcLogicalItens')]"
+  r_djt %>%
+    xml2::read_html() %>%
+    rvest::html_nodes("button") %>%
+    rvest::html_attr("onclick") %>%
+    stringr::str_extract("(?<=plcLogicaItens:0:)j_id[0-9]+") %>%
+    magrittr::extract(!is.na(.)) %>%
+    dplyr::first()
 }
 
 # Parse results table
