@@ -19,7 +19,7 @@ download_djt <- function(trt, path, booklet = "all", date_min = Sys.Date() - 1,
   dir.create(path, showWarnings = FALSE, recursive = TRUE)
 
   # Convert parameters to internal format and check them
-  trt <- ifelse(trt == "all", 0L, as.integer(trt))
+  trt <- ifelse(trt == "tst", "0", ifelse(trt == "all", "", as.integer(trt)))
   booklet <- switch (booklet, "adm" = "0", "jud" = "1", "all" = "")
   dates <- lubridate::ymd(date_min, date_max)
   check_parms(trt, booklet, dates)
@@ -52,11 +52,17 @@ download_djt <- function(trt, path, booklet = "all", date_min = Sys.Date() - 1,
   n_pages <- n_pages(r_djt)
 
   # Download PDFs of each page
-  out <- tibble::tibble(page = 1:n_pages) %>%
-    dplyr::group_by(page) %>%
-    dplyr::do(pagination(
-      trt, path, booklet, dates, (.$page-1)*30+1, get_state(r_search))) %>%
-    dplyr::ungroup()
+  tb_error <- tibble::tibble(file = "", result = "error")
+  safe_pagination <- purrr::possibly(pagination, otherwise = tb_error)
+
+  out <- purrr::map_dfr(seq_len(n_pages), safe_pagination,
+                        trt = trt,
+                        path = path,
+                        booklet = booklet,
+                        dates = dates,
+                        state = get_state(r_search),
+                        jid = get_jid(r_djt),
+                        .id = "page")
 
   return(out)
 }
@@ -65,8 +71,8 @@ download_djt <- function(trt, path, booklet = "all", date_min = Sys.Date() - 1,
 check_parms <- function(trt, booklet, dates) {
 
   # Check whether each parameter fits the expected format
-  if (length(trt) != 1 || !trt %in% 0:24) {
-    stop("TRT must be an number between 1 and 24 or 'all'")
+  if (length(trt) != 1 || !trt %in% c("", 0:24)) {
+    stop("TRT must be an number between 1 and 24 or ''")
   }
   if (length(booklet) != 1 || !booklet %in% c("0", "1", "")) {
     stop("Booklet must be either 'jud', 'adm', or 'all'")
