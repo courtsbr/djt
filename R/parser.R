@@ -1,4 +1,3 @@
-
 #' Converts a PDF file to text (wraps a call to Poppler's `pdftotext` function)
 #'
 #' @param file Path to file
@@ -171,9 +170,9 @@ remove_footers <- function(string) {
 #' @export
 pre_process <- function(string) {
   string %>%
-    remove_first_header %>%
-    remove_headers %>%
-    remove_footers
+    remove_first_header() %>%
+    remove_headers() %>%
+    remove_footers()
 }
 
 #' Find HTML styles
